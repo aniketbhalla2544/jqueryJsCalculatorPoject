@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="./css/index.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+    <!-- bootstrp icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <title>My Responsive Nav bar</title>
+</head>
+
+<body id="homePage" class="grid-center">
+
+    <ul class="calculator__grid-box">
+
+        <li id="box1"><span>0</span></li>
+        <li data-attrr="clear" id="box2"><span>C</span></li>
+        <li data-attrr="/" id="box3"><span>/</span></li>
+        <li data-attrr="*" id="box4"><span>*</span></li>
+        <li data-attrr="7" id="box5"><span>7</span></li>
+        <li data-attrr="8" id="box6"><span>8</span></li>
+        <li data-attrr="9" id="box7"><span>9</span></li>
+        <li data-attrr="-" id="box8"><span>-</span></li>
+        <li data-attrr="4" id="box9"><span>4</span></li>
+        <li data-attrr="5" id="box10"><span>5</span></li>
+        <li data-attrr="6" id="box11"><span>6</span></li>
+        <li data-attrr="+" id="box12"><span>+</span></li>
+        <li data-attrr="1" id="box13"><span>1</span></li>
+        <li data-attrr="2" id="box14"><span>2</span></li>
+        <li data-attrr="3" id="box15"><span>3</span></li>
+        <li data-attrr="0" id="box16"><span>0</span></li>
+        <li data-attrr="00" id="box17"><span>00</span></li>
+        <li data-attrr="." id="box18"><span>.</span></li>
+        <li data-attrr="=" id="box19"><span>=</span></li>
+    </ul>
+
+    <ul id="socials">
+        <li class="grid-center"><a href="#"><i class="fs-6 text-white bi bi-whatsapp"></i></a></li>
+        <li class="grid-center"><a href="#"><i class="fs-6 text-white bi bi-linkedin"></i></a></li>
+        <li class="grid-center"><a href="#"><i class="fs-6 text-white bi bi-instagram"></i></a></li>
+        <li class="grid-center"><a href="#"><i class="fs-6 text-white bi bi-twitter"></i></a></li>
+    </ul>
+
+    <!-- bootstrap script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+
+
+    <!-- adding grid center class to all elements of ul.calculator__grid-box -->
+    <script>
+
+        // converting all childs to array
+        const allChilds = [...$("ul.calculator__grid-box").children()];
+
+        // getting all childs excluding first child
+        const [first, ...rest] = allChilds;
+
+        // applying grid-center class to  all childs excluding first child
+        rest.forEach(child => $(child).addClass("grid-center"));
+
+        const lielementsArray = $("ul.calculator__grid-box > *.grid-center");
+        const outputArea = $("#box1").children()[0];
+        let count = 0;
+
+
+        $.each(lielementsArray, function (index, obj) {
+
+            $(obj).click(function (e) {
+
+                count++;
+                (count === 1) ? outputArea.innerText = "" : null
+
+                const attrValue = $($(obj)[0]).attr("data-attrr");
+
+                if (attrValue !== "clear" && attrValue !== "=") {
+                    outputArea.innerText += attrValue;
+                } else {
+
+                    // if Clear || = are clicked
+                    (attrValue === "clear")
+                        ? count = 0
+                        : outputArea.innerText = eval(outputArea.innerText)
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
